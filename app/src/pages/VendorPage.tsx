@@ -7,9 +7,9 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const sampleProducts: import('../store').Product[] = [
-  { id: '1', name: 'Minimal Desk Lamp', nameAr: 'مصباح مكتبي بسيط', price: 129, image: '/images/product_1.jpg', category: 'home', rating: 4.8, reviews: 124, vendor: 'HomeCraft', inStock: true },
-  { id: '2', name: 'Soft Knit Throw', nameAr: 'بطانية محبوكة ناعمة', price: 199, image: '/images/product_2.jpg', category: 'home', rating: 4.9, reviews: 89, vendor: 'HomeCraft', inStock: true },
-  { id: '4', name: 'Ceramic Mug Set', nameAr: 'طقم أكواب سيراميك', price: 89, image: '/images/product_4.jpg', category: 'home', rating: 4.6, reviews: 78, vendor: 'HomeCraft', inStock: true },
+  { id: '1', name: 'Minimal Desk Lamp', nameAr: 'مصباح مكتبي بسيط', price: 129, image: '/Demo-eCommerce-/images/product_1.jpg', category: 'home', rating: 4.8, reviews: 124, vendor: 'HomeCraft', inStock: true },
+  { id: '2', name: 'Soft Knit Throw', nameAr: 'بطانية محبوكة ناعمة', price: 199, image: '/Demo-eCommerce-/images/product_2.jpg', category: 'home', rating: 4.9, reviews: 89, vendor: 'HomeCraft', inStock: true },
+  { id: '4', name: 'Ceramic Mug Set', nameAr: 'طقم أكواب سيراميك', price: 89, image: '/Demo-eCommerce-/images/product_4.jpg', category: 'home', rating: 4.6, reviews: 78, vendor: 'HomeCraft', inStock: true },
 ];
 
 export function VendorPage() {
@@ -22,7 +22,7 @@ export function VendorPage() {
   const vendor = {
     id: id || '1',
     name: id || 'HomeCraft',
-    description: isRTL 
+    description: isRTL
       ? 'متخصصون في منتجات المنزل العصرية والمستدامة. نؤمن بأن منزلك يعكس شخصيتك.'
       : 'Specializing in modern and sustainable home products. We believe your home reflects your personality.',
     rating: 4.8,
@@ -31,8 +31,8 @@ export function VendorPage() {
     followers: 1205,
     location: isRTL ? 'الدوحة، قطر' : 'Doha, Qatar',
     joined: '2023',
-    banner: '/images/home_feature.jpg',
-    logo: '/images/product_1.jpg',
+    banner: '/Demo-eCommerce-/images/home_feature.jpg',
+    logo: '/Demo-eCommerce-/images/product_1.jpg',
   };
 
   return (
@@ -143,7 +143,7 @@ export function VendorPage() {
                     </div>
                   </div>
                   <p className="text-gray-600">
-                    {isRTL 
+                    {isRTL
                       ? 'منتج رائع وجودة ممتازة. التوصيل كان سريعًا والتغليف ممتاز.'
                       : 'Great product and excellent quality. Delivery was fast and packaging was great.'}
                   </p>

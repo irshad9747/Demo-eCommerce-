@@ -14,14 +14,14 @@ ScrollTrigger.config({ limitCallbacks: true });
 
 // Sample products data
 const sampleProducts: import('../store').Product[] = [
-  { id: '1', name: 'Minimal Desk Lamp', nameAr: 'مصباح مكتبي بسيط', price: 129, image: '/images/product_1.jpg', category: 'home', rating: 4.8, reviews: 124, vendor: 'HomeCraft', inStock: true },
-  { id: '2', name: 'Soft Knit Throw', nameAr: 'بطانية محبوكة ناعمة', price: 199, image: '/images/product_2.jpg', category: 'home', rating: 4.9, reviews: 89, vendor: 'CozyLiving', inStock: true },
-  { id: '3', name: 'Everyday Backpack', nameAr: 'حقيبة ظهر يومية', price: 249, image: '/images/product_3.jpg', category: 'fashion', rating: 4.7, reviews: 156, vendor: 'UrbanGear', inStock: true },
-  { id: '4', name: 'Ceramic Mug Set', nameAr: 'طقم أكواب سيراميك', price: 89, image: '/images/product_4.jpg', category: 'home', rating: 4.6, reviews: 78, vendor: 'ArtisanHome', inStock: true },
-  { id: '5', name: 'Wireless Mouse', nameAr: 'فأرة لاسلكية', price: 149, image: '/images/product_5.jpg', category: 'electronics', rating: 4.5, reviews: 203, vendor: 'TechPro', inStock: true },
-  { id: '6', name: 'Cotton Tee', nameAr: 'تيشيرت قطني', price: 79, image: '/images/product_6.jpg', category: 'fashion', rating: 4.4, reviews: 112, vendor: 'BasicWear', inStock: true },
-  { id: '7', name: 'Running Cap', nameAr: 'كاب رياضي', price: 59, image: '/images/product_7.jpg', category: 'fashion', rating: 4.3, reviews: 67, vendor: 'SportFit', inStock: true },
-  { id: '8', name: 'Portable Speaker', nameAr: 'سماعة محمولة', price: 179, image: '/images/product_8.jpg', category: 'electronics', rating: 4.7, reviews: 145, vendor: 'SoundWave', inStock: true },
+  { id: '1', name: 'Minimal Desk Lamp', nameAr: 'مصباح مكتبي بسيط', price: 129, image: '/Demo-eCommerce-/images/product_1.jpg', category: 'home', rating: 4.8, reviews: 124, vendor: 'HomeCraft', inStock: true },
+  { id: '2', name: 'Soft Knit Throw', nameAr: 'بطانية محبوكة ناعمة', price: 199, image: '/Demo-eCommerce-/images/product_2.jpg', category: 'home', rating: 4.9, reviews: 89, vendor: 'CozyLiving', inStock: true },
+  { id: '3', name: 'Everyday Backpack', nameAr: 'حقيبة ظهر يومية', price: 249, image: '/Demo-eCommerce-/images/product_3.jpg', category: 'fashion', rating: 4.7, reviews: 156, vendor: 'UrbanGear', inStock: true },
+  { id: '4', name: 'Ceramic Mug Set', nameAr: 'طقم أكواب سيراميك', price: 89, image: '/Demo-eCommerce-/images/product_4.jpg', category: 'home', rating: 4.6, reviews: 78, vendor: 'ArtisanHome', inStock: true },
+  { id: '5', name: 'Wireless Mouse', nameAr: 'فأرة لاسلكية', price: 149, image: '/Demo-eCommerce-/images/product_5.jpg', category: 'electronics', rating: 4.5, reviews: 203, vendor: 'TechPro', inStock: true },
+  { id: '6', name: 'Cotton Tee', nameAr: 'تيشيرت قطني', price: 79, image: '/Demo-eCommerce-/images/product_6.jpg', category: 'fashion', rating: 4.4, reviews: 112, vendor: 'BasicWear', inStock: true },
+  { id: '7', name: 'Running Cap', nameAr: 'كاب رياضي', price: 59, image: '/Demo-eCommerce-/images/product_7.jpg', category: 'fashion', rating: 4.3, reviews: 67, vendor: 'SportFit', inStock: true },
+  { id: '8', name: 'Portable Speaker', nameAr: 'سماعة محمولة', price: 179, image: '/Demo-eCommerce-/images/product_8.jpg', category: 'electronics', rating: 4.7, reviews: 145, vendor: 'SoundWave', inStock: true },
 ];
 
 const trendingProducts = sampleProducts.slice(0, 5);
@@ -383,7 +383,7 @@ export function HomePage() {
       <section ref={heroRef} className="relative h-screen w-full overflow-hidden z-10">
         <div className="hero-bg absolute inset-0">
           <img
-            src="/images/hero_lifestyle.jpg"
+            src="/Demo-eCommerce-/images/hero_lifestyle.jpg"
             alt="Hero"
             className="w-full h-full object-cover"
           />
@@ -433,7 +433,7 @@ export function HomePage() {
         </div>
         <div className="relative w-full h-full px-[4vw] py-[14vh]">
           <div className="curated-card-a absolute left-[4vw] top-[14vh] w-[52vw] h-[72vh] rounded-[28px] overflow-hidden shadow-lg">
-            <img src="/images/featured_card_a.jpg" alt="Editor's Choice" className="w-full h-full object-cover" />
+            <img src="/Demo-eCommerce-/images/featured_card_a.jpg" alt="Editor's Choice" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className={`absolute bottom-8 ${isRTL ? 'right-8' : 'left-8'} text-white`}>
               <h3 className="text-2xl font-bold mb-2">{t('sections.editorsChoice')}</h3>
@@ -442,7 +442,7 @@ export function HomePage() {
             </div>
           </div>
           <div className="curated-card-b absolute left-[58vw] top-[14vh] w-[38vw] h-[34vh] rounded-[28px] overflow-hidden shadow-lg">
-            <img src="/images/featured_card_b.jpg" alt="New Arrivals" className="w-full h-full object-cover" />
+            <img src="/Demo-eCommerce-/images/featured_card_b.jpg" alt="New Arrivals" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className={`absolute bottom-6 ${isRTL ? 'right-6' : 'left-6'} text-white`}>
               <h3 className="text-xl font-bold mb-1">{t('sections.newArrivals')}</h3>
@@ -450,7 +450,7 @@ export function HomePage() {
             </div>
           </div>
           <div className="curated-card-c absolute left-[58vw] top-[52vh] w-[38vw] h-[34vh] rounded-[28px] overflow-hidden shadow-lg">
-            <img src="/images/featured_card_c.jpg" alt="Top Rated" className="w-full h-full object-cover" />
+            <img src="/Demo-eCommerce-/images/featured_card_c.jpg" alt="Top Rated" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className={`absolute bottom-6 ${isRTL ? 'right-6' : 'left-6'} text-white`}>
               <h3 className="text-xl font-bold mb-1">{t('sections.topRated')}</h3>
@@ -489,7 +489,7 @@ export function HomePage() {
         <div className="electronics-card relative w-[92vw] h-[72vh] rounded-[28px] overflow-hidden shadow-lg">
           <div className="flex h-full">
             <div className="electronics-image w-[60%] h-full">
-              <img src="/images/electronics_feature.jpg" alt="Electronics" className="w-full h-full object-cover" />
+              <img src="/Demo-eCommerce-/images/electronics_feature.jpg" alt="Electronics" className="w-full h-full object-cover" />
             </div>
             <div className="electronics-text w-[40%] h-full bg-[#F6F7F6] flex flex-col justify-center p-12">
               <h2 className="text-3xl lg:text-4xl font-bold text-[#111111] mb-4">{t('sections.techFits')}</h2>
@@ -514,7 +514,7 @@ export function HomePage() {
         </div>
         <div className="deals-tiles px-[4vw] grid grid-cols-4 grid-rows-2 gap-4 h-[66vh]">
           <div className="deals-tile-a row-span-2 rounded-[28px] overflow-hidden relative">
-            <img src="/images/deals_tile_a.jpg" alt="Laptops" className="w-full h-full object-cover" />
+            <img src="/Demo-eCommerce-/images/deals_tile_a.jpg" alt="Laptops" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className="absolute bottom-6 left-6 text-white">
               <h3 className="text-xl font-bold">{t('sections.laptopsTablets')}</h3>
@@ -522,7 +522,7 @@ export function HomePage() {
             </div>
           </div>
           <div className="deals-tile-b rounded-[28px] overflow-hidden relative">
-            <img src="/images/deals_tile_b.jpg" alt="Audio" className="w-full h-full object-cover" />
+            <img src="/Demo-eCommerce-/images/deals_tile_b.jpg" alt="Audio" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className="absolute bottom-4 left-4 text-white">
               <h3 className="text-lg font-bold">{t('sections.audio')}</h3>
@@ -530,7 +530,7 @@ export function HomePage() {
             </div>
           </div>
           <div className="deals-tile-c rounded-[28px] overflow-hidden relative">
-            <img src="/images/deals_tile_c.jpg" alt="Smartwatches" className="w-full h-full object-cover" />
+            <img src="/Demo-eCommerce-/images/deals_tile_c.jpg" alt="Smartwatches" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className="absolute bottom-4 left-4 text-white">
               <h3 className="text-lg font-bold">{t('sections.smartwatches')}</h3>
@@ -538,7 +538,7 @@ export function HomePage() {
             </div>
           </div>
           <div className="deals-tile-d row-span-2 rounded-[28px] overflow-hidden relative">
-            <img src="/images/deals_tile_d.jpg" alt="Gaming" className="w-full h-full object-cover" />
+            <img src="/Demo-eCommerce-/images/deals_tile_d.jpg" alt="Gaming" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className="absolute bottom-6 left-6 text-white">
               <h3 className="text-xl font-bold">{t('sections.gaming')}</h3>
@@ -553,7 +553,7 @@ export function HomePage() {
         <div className="fashion-card relative w-[92vw] h-[72vh] rounded-[28px] overflow-hidden shadow-lg">
           <div className="flex h-full">
             <div className="fashion-image w-[55%] h-full">
-              <img src="/images/fashion_feature.jpg" alt="Fashion" className="w-full h-full object-cover" />
+              <img src="/Demo-eCommerce-/images/fashion_feature.jpg" alt="Fashion" className="w-full h-full object-cover" />
             </div>
             <div className="fashion-text w-[45%] h-full bg-white flex flex-col justify-center p-12">
               <h2 className="text-3xl lg:text-4xl font-bold text-[#111111] mb-4">{t('sections.freshFits')}</h2>
@@ -580,7 +580,7 @@ export function HomePage() {
               </Button>
             </div>
             <div className="home-image w-[60%] h-full">
-              <img src="/images/home_feature.jpg" alt="Home" className="w-full h-full object-cover" />
+              <img src="/Demo-eCommerce-/images/home_feature.jpg" alt="Home" className="w-full h-full object-cover" />
             </div>
           </div>
         </div>
@@ -589,7 +589,7 @@ export function HomePage() {
       {/* Section 8: Brand Banner */}
       <section ref={brandRef} className="relative h-screen w-full z-[80] overflow-hidden">
         <div className="brand-bg absolute inset-0">
-          <img src="/images/brand_banner.jpg" alt="Brand" className="w-full h-full object-cover" />
+          <img src="/Demo-eCommerce-/images/brand_banner.jpg" alt="Brand" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/10 to-black/45" />
         </div>
         <div className="brand-text relative h-full flex flex-col items-center justify-center text-center text-white px-6">
@@ -621,7 +621,7 @@ export function HomePage() {
         <div className="beauty-card relative w-[92vw] h-[72vh] rounded-[28px] overflow-hidden shadow-lg">
           <div className="flex h-full">
             <div className="beauty-image w-[55%] h-full">
-              <img src="/images/beauty_feature.jpg" alt="Beauty" className="w-full h-full object-cover" />
+              <img src="/Demo-eCommerce-/images/beauty_feature.jpg" alt="Beauty" className="w-full h-full object-cover" />
             </div>
             <div className="beauty-text w-[45%] h-full bg-white flex flex-col justify-center p-12">
               <h2 className="text-3xl lg:text-4xl font-bold text-[#111111] mb-4">{t('sections.glowStarts')}</h2>
@@ -673,7 +673,7 @@ export function HomePage() {
               </div>
             </div>
             <div className="vendor-image w-[60%] h-full">
-              <img src="/images/vendor_spotlight.jpg" alt="Vendors" className="w-full h-full object-cover" />
+              <img src="/Demo-eCommerce-/images/vendor_spotlight.jpg" alt="Vendors" className="w-full h-full object-cover" />
             </div>
           </div>
         </div>
@@ -703,7 +703,7 @@ export function HomePage() {
         <div className="loyalty-card relative w-[92vw] h-[72vh] rounded-[28px] overflow-hidden shadow-lg">
           <div className="flex h-full">
             <div className="loyalty-image w-[55%] h-full">
-              <img src="/images/loyalty_feature.jpg" alt="Loyalty" className="w-full h-full object-cover" />
+              <img src="/Demo-eCommerce-/images/loyalty_feature.jpg" alt="Loyalty" className="w-full h-full object-cover" />
             </div>
             <div className="loyalty-text w-[45%] h-full bg-white flex flex-col justify-center p-12">
               <h2 className="text-3xl lg:text-4xl font-bold text-[#111111] mb-4">{t('sections.earnAsYouShop')}</h2>
