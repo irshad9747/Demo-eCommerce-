@@ -47,7 +47,9 @@ export function HomePage() {
   const loyaltyRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add("(min-width: 1024px)", () => {
       // Hero entrance animation
       const heroTl = gsap.timeline();
       heroTl.fromTo('.hero-bg',
@@ -374,7 +376,32 @@ export function HomePage() {
       });
     });
 
-    return () => ctx.revert();
+    mm.add("(max-width: 1023px)", () => {
+      // Mobile simpler animations
+      gsap.from('.hero-content', { y: 30, opacity: 0, duration: 1 });
+
+      const sections = [
+        curatedRef, trendingRef, electronicsRef, flashDealsRef,
+        fashionRef, homeRef, brandRef, beautyRef, vendorRef, loyaltyRef
+      ];
+
+      sections.forEach(ref => {
+        if (ref.current) {
+          gsap.from(ref.current.querySelectorAll('.mobile-animate'), {
+            y: 30,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            scrollTrigger: {
+              trigger: ref.current,
+              start: 'top 80%',
+            }
+          });
+        }
+      });
+    });
+
+    return () => mm.revert();
   }, [isRTL]);
 
   return (
@@ -427,159 +454,165 @@ export function HomePage() {
       </section>
 
       {/* Section 2: Curated Picks */}
-      <section ref={curatedRef} className="relative h-screen w-full bg-[#F6F7F6] z-20 flex items-center justify-center">
-        <div className="absolute top-[9vh] left-[4vw] text-sm font-medium tracking-widest text-gray-500">
-          {t('sections.curatedPicks')}
+      <section ref={curatedRef} className="relative min-h-[80vh] lg:h-screen w-full bg-white z-20 overflow-hidden flex flex-col justify-center py-12 lg:py-0">
+        <div className="lg:hidden px-6 mb-8 text-center mobile-animate">
+          <h2 className="text-3xl font-bold text-[#111111]">{t('sections.curatedCollection')}</h2>
+          <p className="text-gray-500 mt-2">{t('sections.handpicked')}</p>
         </div>
-        <div className="relative w-full h-full px-[4vw] py-[14vh]">
-          <div className="curated-card-a absolute left-[4vw] top-[14vh] w-[52vw] h-[72vh] rounded-[28px] overflow-hidden shadow-lg">
+        <div className="relative w-full h-full lg:px-[4vw] lg:py-[14vh] px-6">
+          <div className="curated-card-a lg:absolute lg:left-[4vw] lg:top-[14vh] lg:w-[52vw] lg:h-[72vh] w-full aspect-[4/5] sm:aspect-video lg:aspect-auto rounded-[28px] overflow-hidden shadow-lg mb-6 lg:mb-0 mobile-animate">
             <img src="/Demo-eCommerce-/images/featured_card_a.jpg" alt="Editor's Choice" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className={`absolute bottom-8 ${isRTL ? 'right-8' : 'left-8'} text-white`}>
               <h3 className="text-2xl font-bold mb-2">{t('sections.editorsChoice')}</h3>
-              <p className="text-white/80 mb-4">{t('sections.handpicked')}</p>
-              <Button variant="secondary" className="rounded-full">{t('sections.viewCollection')}</Button>
+              <Link to="/search" className="text-sm font-medium underline">{t('hero.shopNow')}</Link>
             </div>
           </div>
-          <div className="curated-card-b absolute left-[58vw] top-[14vh] w-[38vw] h-[34vh] rounded-[28px] overflow-hidden shadow-lg">
-            <img src="/Demo-eCommerce-/images/featured_card_b.jpg" alt="New Arrivals" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-            <div className={`absolute bottom-6 ${isRTL ? 'right-6' : 'left-6'} text-white`}>
-              <h3 className="text-xl font-bold mb-1">{t('sections.newArrivals')}</h3>
-              <Button variant="link" className="text-white p-0">{t('sections.browseNew')}</Button>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:block gap-6">
+            <div className="curated-card-b lg:absolute lg:left-[58vw] lg:top-[14vh] lg:w-[38vw] lg:h-[34vh] w-full aspect-square sm:aspect-auto sm:h-[34vh] lg:aspect-auto rounded-[28px] overflow-hidden shadow-lg mobile-animate">
+              <img src="/Demo-eCommerce-/images/featured_card_b.jpg" alt="New Arrivals" className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <div className={`absolute bottom-6 ${isRTL ? 'right-6' : 'left-6'} text-white`}>
+                <h3 className="text-xl font-bold mb-1">{t('sections.newArrivals')}</h3>
+                <Link to="/search" className="text-sm font-medium underline">{t('hero.shopNow')}</Link>
+              </div>
             </div>
-          </div>
-          <div className="curated-card-c absolute left-[58vw] top-[52vh] w-[38vw] h-[34vh] rounded-[28px] overflow-hidden shadow-lg">
-            <img src="/Demo-eCommerce-/images/featured_card_c.jpg" alt="Top Rated" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-            <div className={`absolute bottom-6 ${isRTL ? 'right-6' : 'left-6'} text-white`}>
-              <h3 className="text-xl font-bold mb-1">{t('sections.topRated')}</h3>
-              <Button variant="link" className="text-white p-0">{t('sections.seeReviews')}</Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 3: Trending Now */}
-      <section ref={trendingRef} className="relative h-screen w-full bg-[#F6F7F6] z-30 flex items-center">
-        <div className="w-full px-[4vw]">
-          <div className="flex flex-col lg:flex-row gap-8">
-            <div className="trending-title lg:w-[40vw]">
-              <h2 className="text-4xl lg:text-5xl font-bold text-[#111111] mb-4">{t('sections.trendingNow')}</h2>
-              <p className="text-gray-600 mb-6">{t('sections.trendingSub')}</p>
-              <Button variant="link" className="p-0 text-[#2F5DFF]">
-                {t('sections.viewAllTrending')} {isRTL ? <ArrowLeft className="w-4 h-4 ml-2" /> : <ArrowRight className="w-4 h-4 ml-2" />}
-              </Button>
-            </div>
-            <div className="trending-strip flex-1 overflow-x-auto">
-              <div className="flex gap-4 pb-4">
-                {trendingProducts.map((product) => (
-                  <div key={product.id} className="flex-shrink-0 w-[200px] lg:w-[15vw]">
-                    <ProductCard product={product} variant="compact" />
-                  </div>
-                ))}
+            <div className="curated-card-c lg:absolute lg:left-[58vw] lg:top-[52vh] lg:w-[38vw] lg:h-[34vh] w-full aspect-square sm:aspect-auto sm:h-[34vh] lg:aspect-auto rounded-[28px] overflow-hidden shadow-lg mobile-animate">
+              <img src="/Demo-eCommerce-/images/featured_card_c.jpg" alt="Top Rated" className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <div className={`absolute bottom-6 ${isRTL ? 'right-6' : 'left-6'} text-white`}>
+                <h2 className="text-xl font-bold mb-1">{t('sections.topRated')}</h2>
+                <Link to="/search" className="text-sm font-medium underline">{t('hero.shopNow')}</Link>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Section 4: Electronics */}
-      <section ref={electronicsRef} className="relative h-screen w-full bg-[#F6F7F6] z-40 flex items-center justify-center">
-        <div className="electronics-card relative w-[92vw] h-[72vh] rounded-[28px] overflow-hidden shadow-lg">
-          <div className="flex h-full">
-            <div className="electronics-image w-[60%] h-full">
+      {/* Section 3: Trending Strip */}
+      <section ref={trendingRef} className="relative min-h-[60vh] lg:h-screen w-full bg-white z-30 flex flex-col justify-center py-12 lg:py-0">
+        <div className="trending-title px-[4vw] mobile-animate">
+          <h2 className="text-4xl lg:text-7xl font-bold text-[#111111] leading-none">
+            {t('sections.trendingNow')}
+          </h2>
+          <p className="text-gray-500 mt-4 text-lg lg:text-xl max-w-xl">
+            {t('sections.trendingSub')}
+          </p>
+        </div>
+        <div className="trending-strip relative mt-12 lg:mt-[15vh] px-[4vw]">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mobile-animate">
+            {trendingProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Section 4: Electronics Section */}
+      <section ref={electronicsRef} className="relative min-h-[70vh] lg:h-screen w-full flex items-center justify-center z-40 bg-[#F6F7F6] py-12 lg:py-0">
+        <div className="electronics-card relative w-[92vw] lg:h-[72vh] rounded-[28px] overflow-hidden shadow-lg mobile-animate">
+          <div className="flex flex-col lg:flex-row h-full">
+            <div className="electronics-image w-full lg:w-[60%] h-[40vh] lg:h-full">
               <img src="/Demo-eCommerce-/images/electronics_feature.jpg" alt="Electronics" className="w-full h-full object-cover" />
             </div>
-            <div className="electronics-text w-[40%] h-full bg-[#F6F7F6] flex flex-col justify-center p-12">
+            <div className="electronics-text w-full lg:w-[40%] h-full bg-[#F6F7F6] flex flex-col justify-center p-8 lg:p-12">
               <h2 className="text-3xl lg:text-4xl font-bold text-[#111111] mb-4">{t('sections.techFits')}</h2>
-              <p className="text-gray-600 mb-6">{t('sections.techSub')}</p>
-              <p className="text-sm text-[#2F5DFF] mb-8">{t('sections.upTo')}</p>
-              <Button className="bg-[#2F5DFF] hover:bg-[#2F5DFF]/90 rounded-full w-fit">
-                {t('sections.shopElectronics')}
+              <p className="text-gray-600 mb-8 leading-relaxed">
+                {isRTL
+                  ? 'اكتشف أحدث التقنيات المصممة لنمط حياتك. من الأداء القوي إلى التصميم الأنيق.'
+                  : 'Discover cutting-edge technology designed for your lifestyle. From high performance to sleek design.'}
+              </p>
+              <Button asChild className="bg-[#111111] hover:bg-[#111111]/90 rounded-full w-fit px-8 py-6">
+                <Link to="/search?category=electronics">{t('sections.exploreTech')}</Link>
               </Button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Section 5: Flash Deals */}
-      <section ref={flashDealsRef} className="relative h-screen w-full bg-[#F6F7F6] z-50 flex flex-col justify-center">
-        <div className="px-[4vw] mb-6 flex justify-between items-center">
-          <h2 className="text-3xl lg:text-4xl font-bold text-[#111111]">{t('sections.flashDeals')}</h2>
-          <div className="text-right">
-            <span className="text-sm text-gray-500">{t('sections.endsIn')}</span>
-            <div className="text-2xl font-bold text-[#2F5DFF]">04 : 12 : 33</div>
+      {/* Section 5: Flash Deals / Horizontal Grid */}
+      <section ref={flashDealsRef} className="relative min-h-screen w-full py-12 lg:py-24 z-50 bg-white">
+        <div className="px-[4vw] mb-12 flex items-center justify-between mobile-animate">
+          <div>
+            <h2 className="text-3xl font-bold text-[#111111]">{t('sections.flashDeals')}</h2>
+            <p className="text-gray-500 mt-2">{t('sections.limitedTime')}</p>
           </div>
+          <Button variant="outline" className="rounded-full">{t('sections.viewAll')}</Button>
         </div>
-        <div className="deals-tiles px-[4vw] grid grid-cols-4 grid-rows-2 gap-4 h-[66vh]">
-          <div className="deals-tile-a row-span-2 rounded-[28px] overflow-hidden relative">
+        <div className="deals-tiles px-[4vw] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 lg:grid-rows-2 gap-4 lg:h-[66vh]">
+          <div className="deals-tile-a lg:row-span-2 rounded-[28px] overflow-hidden relative aspect-video lg:aspect-auto mobile-animate">
             <img src="/Demo-eCommerce-/images/deals_tile_a.jpg" alt="Laptops" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className="absolute bottom-6 left-6 text-white">
               <h3 className="text-xl font-bold">{t('sections.laptopsTablets')}</h3>
-              <p className="text-white/80">{t('sections.saveUpTo')}</p>
+              <p className="text-sm font-medium opacity-80">{isRTL ? 'خصم حتى 30%' : 'Up to 30% OFF'}</p>
             </div>
           </div>
-          <div className="deals-tile-b rounded-[28px] overflow-hidden relative">
+          <div className="deals-tile-b rounded-[28px] overflow-hidden relative aspect-video lg:aspect-auto mobile-animate">
             <img src="/Demo-eCommerce-/images/deals_tile_b.jpg" alt="Audio" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className="absolute bottom-4 left-4 text-white">
               <h3 className="text-lg font-bold">{t('sections.audio')}</h3>
-              <p className="text-white/80 text-sm">{t('sections.under')}</p>
+              <p className="text-sm font-medium opacity-80">{isRTL ? 'خصم حتى 50%' : 'Up to 50% OFF'}</p>
             </div>
           </div>
-          <div className="deals-tile-c rounded-[28px] overflow-hidden relative">
+          <div className="deals-tile-c rounded-[28px] overflow-hidden relative aspect-video lg:aspect-auto mobile-animate">
             <img src="/Demo-eCommerce-/images/deals_tile_c.jpg" alt="Smartwatches" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className="absolute bottom-4 left-4 text-white">
               <h3 className="text-lg font-bold">{t('sections.smartwatches')}</h3>
-              <p className="text-white/80 text-sm">{t('sections.extraOff')}</p>
+              <p className="text-sm font-medium opacity-80">{isRTL ? 'خصم حتى 20%' : 'Up to 20% OFF'}</p>
             </div>
           </div>
-          <div className="deals-tile-d row-span-2 rounded-[28px] overflow-hidden relative">
+          <div className="deals-tile-d lg:row-span-2 rounded-[28px] overflow-hidden relative aspect-video lg:aspect-auto mobile-animate">
             <img src="/Demo-eCommerce-/images/deals_tile_d.jpg" alt="Gaming" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className="absolute bottom-6 left-6 text-white">
               <h3 className="text-xl font-bold">{t('sections.gaming')}</h3>
-              <p className="text-white/80">{t('sections.bundleOffers')}</p>
+              <p className="text-sm font-medium opacity-80">{isRTL ? 'خصم حتى 40%' : 'Up to 40% OFF'}</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Section 6: Fashion */}
-      <section ref={fashionRef} className="relative h-screen w-full bg-[#F6F7F6] z-[60] flex items-center justify-center">
-        <div className="fashion-card relative w-[92vw] h-[72vh] rounded-[28px] overflow-hidden shadow-lg">
-          <div className="flex h-full">
-            <div className="fashion-image w-[55%] h-full">
+      {/* Section 6: Fashion Feature */}
+      <section ref={fashionRef} className="relative min-h-[70vh] lg:h-screen w-full flex items-center justify-center z-[60] py-12 lg:py-0">
+        <div className="fashion-card relative w-[92vw] lg:h-[72vh] rounded-[28px] overflow-hidden shadow-lg mobile-animate">
+          <div className="flex flex-col lg:flex-row h-full">
+            <div className="fashion-image w-full lg:w-[55%] h-[40vh] lg:h-full">
               <img src="/Demo-eCommerce-/images/fashion_feature.jpg" alt="Fashion" className="w-full h-full object-cover" />
             </div>
-            <div className="fashion-text w-[45%] h-full bg-white flex flex-col justify-center p-12">
+            <div className="fashion-text w-full lg:w-[45%] h-full bg-white flex flex-col justify-center p-8 lg:p-12">
               <h2 className="text-3xl lg:text-4xl font-bold text-[#111111] mb-4">{t('sections.freshFits')}</h2>
-              <p className="text-gray-600 mb-6">{t('sections.fashionSub')}</p>
-              <p className="text-sm text-gray-400 mb-8">{t('sections.newDrops')}</p>
-              <Button className="bg-[#2F5DFF] hover:bg-[#2F5DFF]/90 rounded-full w-fit">
-                {t('sections.shopFashion')}
+              <p className="text-gray-600 mb-8 leading-relaxed italic">
+                {isRTL
+                  ? '"الموضة ليست شيئًا موجودًا في الفساتين فقط. الموضة في السماء، في الشارع، الموضة تتعلق بالأفكار، بالطريقة التي نعيش بها، بما يحدث."'
+                  : '"Fashion is not something that exists in dresses only. Fashion is in the sky, in the street, fashion has to do with ideas, the way we live, what is happening."'}
+              </p>
+              <Button asChild className="bg-[#111111] hover:bg-[#111111]/90 rounded-full w-fit px-8 py-6">
+                <Link to="/search?category=fashion">{t('sections.shopFashion')}</Link>
               </Button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Section 7: Home & Living */}
-      <section ref={homeRef} className="relative h-screen w-full bg-[#F6F7F6] z-[70] flex items-center justify-center">
-        <div className="home-card relative w-[92vw] h-[72vh] rounded-[28px] overflow-hidden shadow-lg">
-          <div className="flex h-full">
-            <div className="home-text w-[40%] h-full bg-[#F6F7F6] flex flex-col justify-center p-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-[#111111] mb-4">{t('sections.makeHome')}</h2>
-              <p className="text-gray-600 mb-6">{t('sections.homeSub')}</p>
-              <p className="text-sm text-gray-400 mb-8">{t('sections.localMakers')}</p>
-              <Button className="bg-[#2F5DFF] hover:bg-[#2F5DFF]/90 rounded-full w-fit">
-                {t('sections.shopHome')}
+      {/* Section 7: Home Feature */}
+      <section ref={homeRef} className="relative min-h-[70vh] lg:h-screen w-full flex items-center justify-center bg-[#F6F7F6] z-[70] py-12 lg:py-0">
+        <div className="home-card relative w-[92vw] lg:h-[72vh] rounded-[28px] overflow-hidden shadow-lg mobile-animate">
+          <div className="flex flex-col-reverse lg:flex-row h-full">
+            <div className="home-text w-full lg:w-[40%] h-full bg-[#111111] flex flex-col justify-center p-8 lg:p-12 py-12 lg:py-12">
+              <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">{t('sections.homeAesthetics')}</h2>
+              <p className="text-white/70 mb-8 leading-relaxed">
+                {isRTL
+                  ? 'حول مساحتك إلى ملاذ. اعثر على القطع المثالية التي تجعل منزلك يشعر وكأنه منزلك حقًا.'
+                  : 'Transform your space into a sanctuary. Find the perfect pieces that make your house feel like home.'}
+              </p>
+              <Button asChild variant="secondary" className="rounded-full w-fit px-8 py-6">
+                <Link to="/search?category=home">{t('sections.discoverHome')}</Link>
               </Button>
             </div>
-            <div className="home-image w-[60%] h-full">
+            <div className="home-image w-full lg:w-[60%] h-[40vh] lg:h-full">
               <img src="/Demo-eCommerce-/images/home_feature.jpg" alt="Home" className="w-full h-full object-cover" />
             </div>
           </div>
@@ -587,15 +620,15 @@ export function HomePage() {
       </section>
 
       {/* Section 8: Brand Banner */}
-      <section ref={brandRef} className="relative h-screen w-full z-[80] overflow-hidden">
+      <section ref={brandRef} className="relative min-h-[60vh] lg:h-screen w-full z-[80] overflow-hidden">
         <div className="brand-bg absolute inset-0">
           <img src="/Demo-eCommerce-/images/brand_banner.jpg" alt="Brand" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/10 to-black/45" />
         </div>
-        <div className="brand-text relative h-full flex flex-col items-center justify-center text-center text-white px-6">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-4 max-w-3xl">{t('sections.quality')}</h2>
-          <p className="text-xl text-white/80 mb-8">{t('sections.brandSub')}</p>
-          <Button size="lg" className="bg-white text-[#111111] hover:bg-white/90 rounded-full px-8">
+        <div className="brand-text relative h-full flex flex-col items-center justify-center text-center text-white px-6 py-20">
+          <h2 className="text-3xl lg:text-5xl font-bold mb-4 max-w-3xl mobile-animate">{t('sections.quality')}</h2>
+          <p className="text-lg lg:text-xl text-white/80 mb-8 mobile-animate">{t('sections.brandSub')}</p>
+          <Button size="lg" className="bg-white text-[#111111] hover:bg-white/90 rounded-full px-8 mobile-animate">
             {t('sections.startShopping')}
           </Button>
         </div>
@@ -617,18 +650,21 @@ export function HomePage() {
       </section>
 
       {/* Section 10: Beauty */}
-      <section ref={beautyRef} className="relative h-screen w-full bg-[#F6F7F6] z-[100] flex items-center justify-center">
-        <div className="beauty-card relative w-[92vw] h-[72vh] rounded-[28px] overflow-hidden shadow-lg">
-          <div className="flex h-full">
-            <div className="beauty-image w-[55%] h-full">
+      <section ref={beautyRef} className="relative min-h-[70vh] lg:h-screen w-full flex items-center justify-center z-[100] py-12 lg:py-0">
+        <div className="beauty-card relative w-[92vw] lg:h-[72vh] rounded-[28px] overflow-hidden shadow-lg mobile-animate">
+          <div className="flex flex-col lg:flex-row h-full">
+            <div className="beauty-image w-full lg:w-[55%] h-[40vh] lg:h-full">
               <img src="/Demo-eCommerce-/images/beauty_feature.jpg" alt="Beauty" className="w-full h-full object-cover" />
             </div>
-            <div className="beauty-text w-[45%] h-full bg-white flex flex-col justify-center p-12">
+            <div className="beauty-text w-full lg:w-[45%] h-full bg-white flex flex-col justify-center p-8 lg:p-12">
               <h2 className="text-3xl lg:text-4xl font-bold text-[#111111] mb-4">{t('sections.glowStarts')}</h2>
-              <p className="text-gray-600 mb-6">{t('sections.beautySub')}</p>
-              <p className="text-sm text-gray-400 mb-8">{t('sections.samples')}</p>
-              <Button className="bg-[#2F5DFF] hover:bg-[#2F5DFF]/90 rounded-full w-fit">
-                {t('sections.shopBeauty')}
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                {isRTL
+                  ? 'ارتقِ بروتينك اليومي مع اختيارات الجمال المتميزة لدينا. من العناية بالبشرة إلى مستحضرات التجميل.'
+                  : 'Elevate your daily routine with our premium beauty picks. From skincare to makeup essentials.'}
+              </p>
+              <Button asChild className="bg-[#111111] hover:bg-[#111111]/90 rounded-full w-fit px-8 py-6">
+                <Link to="/search?category=beauty">{t('sections.shopBeauty')}</Link>
               </Button>
             </div>
           </div>
@@ -657,22 +693,26 @@ export function HomePage() {
       </section>
 
       {/* Section 12: Vendor Spotlight */}
-      <section ref={vendorRef} className="relative h-screen w-full bg-[#F6F7F6] z-[120] flex items-center justify-center">
-        <div className="vendor-card relative w-[92vw] h-[72vh] rounded-[28px] overflow-hidden shadow-lg">
-          <div className="flex h-full">
-            <div className="vendor-text w-[40%] h-full bg-[#F6F7F6] flex flex-col justify-center p-12">
+      <section ref={vendorRef} className="relative min-h-[70vh] lg:h-screen w-full flex items-center justify-center z-[120] py-12 lg:py-0">
+        <div className="vendor-card relative w-[92vw] lg:h-[72vh] rounded-[28px] overflow-hidden shadow-lg mobile-animate">
+          <div className="flex flex-col-reverse lg:flex-row h-full">
+            <div className="vendor-text w-full lg:w-[40%] h-full bg-[#F6F7F6] flex flex-col justify-center p-8 lg:p-12">
               <h2 className="text-3xl lg:text-4xl font-bold text-[#111111] mb-4">{t('sections.meetMakers')}</h2>
-              <p className="text-gray-600 mb-6">{t('sections.vendorSub')}</p>
-              <div className="flex gap-4">
-                <Button className="bg-[#2F5DFF] hover:bg-[#2F5DFF]/90 rounded-full">
-                  {t('sections.exploreStores')}
+              <p className="text-gray-600 mb-8 leading-relaxed">
+                {isRTL
+                  ? 'تواصل مع أفضل البائعين المحليين واكتشف منتجات فريدة مصنوعة بشغف.'
+                  : 'Connect with top local vendors and discover unique products made with passion.'}
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Button asChild className="bg-[#111111] hover:bg-[#111111]/90 rounded-full px-8 py-6">
+                  <Link to="/search?vendors=true">{t('sections.exploreStores')}</Link>
                 </Button>
-                <Button variant="outline" className="rounded-full">
+                <Button variant="outline" className="rounded-full px-8 py-6 border-[#111111] text-[#111111]">
                   {t('sections.becomeVendor')}
                 </Button>
               </div>
             </div>
-            <div className="vendor-image w-[60%] h-full">
+            <div className="vendor-image w-full lg:w-[60%] h-[40vh] lg:h-full">
               <img src="/Demo-eCommerce-/images/vendor_spotlight.jpg" alt="Vendors" className="w-full h-full object-cover" />
             </div>
           </div>
@@ -699,20 +739,24 @@ export function HomePage() {
       </section>
 
       {/* Section 14: Loyalty */}
-      <section ref={loyaltyRef} className="relative h-screen w-full bg-[#F6F7F6] z-[140] flex items-center justify-center">
-        <div className="loyalty-card relative w-[92vw] h-[72vh] rounded-[28px] overflow-hidden shadow-lg">
-          <div className="flex h-full">
-            <div className="loyalty-image w-[55%] h-full">
+      <section ref={loyaltyRef} className="relative min-h-[70vh] lg:h-screen w-full flex items-center justify-center z-[140] py-12 lg:py-0">
+        <div className="loyalty-card relative w-[92vw] lg:h-[72vh] rounded-[28px] overflow-hidden shadow-lg mobile-animate">
+          <div className="flex flex-col lg:flex-row h-full">
+            <div className="loyalty-image w-full lg:w-[55%] h-[40vh] lg:h-full">
               <img src="/Demo-eCommerce-/images/loyalty_feature.jpg" alt="Loyalty" className="w-full h-full object-cover" />
             </div>
-            <div className="loyalty-text w-[45%] h-full bg-white flex flex-col justify-center p-12">
+            <div className="loyalty-text w-full lg:w-[45%] h-full bg-white flex flex-col justify-center p-8 lg:p-12">
               <h2 className="text-3xl lg:text-4xl font-bold text-[#111111] mb-4">{t('sections.earnAsYouShop')}</h2>
-              <p className="text-gray-600 mb-8">{t('sections.loyaltySub')}</p>
-              <div className="flex gap-4">
-                <Button className="bg-[#2F5DFF] hover:bg-[#2F5DFF]/90 rounded-full">
+              <p className="text-gray-600 mb-8 leading-relaxed">
+                {isRTL
+                  ? 'انضم إلى برنامج الولاء لدينا واكسب نقاطًا مع كل عملية شراء. استبدلها بخصومات حصرية ومكافآت.'
+                  : 'Join our loyalty program and earn points with every purchase. Redeem for exclusive discounts and rewards.'}
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Button className="bg-[#111111] hover:bg-[#111111]/90 rounded-full px-8 py-6">
                   {t('sections.joinFree')}
                 </Button>
-                <Button variant="outline" className="rounded-full">
+                <Button variant="outline" className="rounded-full px-8 py-6 border-[#111111] text-[#111111]">
                   {t('sections.learnMore')}
                 </Button>
               </div>
@@ -722,44 +766,43 @@ export function HomePage() {
       </section>
 
       {/* Section 15: Testimonials (Flowing) */}
-      <section className="flowing-section py-20 px-[4vw] bg-[#F6F7F6] z-[150]">
-        <div className="flex justify-between items-center mb-10 flow-item">
+      <section className="flowing-section py-20 px-[4vw] bg-[#F6F7F6] z-[150] pb-32">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-10 flow-item gap-4">
           <h2 className="text-3xl font-bold text-[#111111]">{t('sections.whatShoppersSay')}</h2>
-          <Button variant="link" className="text-[#2F5DFF]">{t('sections.readAllReviews')}</Button>
+          <Button variant="link" className="text-[#111111] p-0 underline">{t('sections.readAllReviews')}</Button>
         </div>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
             {
               text: isRTL
                 ? 'التوصيل كان أسرع مما توقعت وجودة المنتج ممتازة.'
-                : 'Delivery was faster than expected and the product quality is top tier.',
-              name: isRTL ? 'ليان' : 'Layan', location: isRTL ? 'الدوحة' : 'Doha'
+                : 'Delivery was faster than expected and product quality is outstanding.',
+              author: isRTL ? 'سارة ج.' : 'Sarah J.',
+              role: isRTL ? 'متسوق معتمد' : 'Verified Shopper'
             },
             {
               text: isRTL
-                ? 'الإرجاع كان سهلاً حقاً. لهذا السبب أستمر في العودة.'
-                : 'Returns were genuinely hassle-free. That\'s why I keep coming back.',
-              name: isRTL ? 'عمر' : 'Omar', location: isRTL ? 'الوكرة' : 'Al Wakrah'
+                ? 'خدمة عملاء رائعة وتجربة تسوق سلسة للغاية.'
+                : 'Amazing customer service and a very smooth shopping experience.',
+              author: isRTL ? 'محمد ع.' : 'Ahmed K.',
+              role: isRTL ? 'عميل وفي' : 'Loyal Customer'
             },
             {
               text: isRTL
-                ? 'أحب دعم البائعين المحليين هنا. التنوع مذهل.'
-                : 'Love supporting local vendors here. The variety is amazing.',
-              name: isRTL ? 'نور' : 'Noor', location: isRTL ? 'لوسيل' : 'Lusail'
-            },
-          ].map((testimonial, i) => (
-            <div key={i} className="flow-item bg-white rounded-[22px] p-6 shadow-sm">
-              <div className="flex gap-1 mb-4">
-                {[...Array(5)].map((_, j) => (
-                  <Star key={j} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                ))}
-              </div>
-              <p className="text-gray-700 mb-6">&ldquo;{testimonial.text}&rdquo;</p>
+                ? 'أفضل مكان للعثور على قطع فريدة لمنزلي.'
+                : 'The best place to find unique pieces for my home.',
+              author: isRTL ? 'ليلى م.' : 'Layla M.',
+              role: isRTL ? 'مصممة ديكور' : 'Interior Designer'
+            }
+          ].map((t, i) => (
+            <div key={i} className="flow-item bg-white p-8 rounded-[28px] shadow-sm border border-gray-100 italic relative">
+              <span className="text-6xl text-gray-100 absolute top-4 left-4 font-serif">"</span>
+              <p className="text-gray-700 mb-6 relative z-10">{t.text}</p>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-gray-200 rounded-full" />
+                <div className="w-10 h-10 rounded-full bg-gray-200" />
                 <div>
-                  <p className="font-medium text-[#111111]">{testimonial.name}</p>
-                  <p className="text-sm text-gray-500">{testimonial.location}</p>
+                  <p className="font-bold text-[#111111] text-sm">{t.author}</p>
+                  <p className="text-xs text-gray-400">{t.role}</p>
                 </div>
               </div>
             </div>
