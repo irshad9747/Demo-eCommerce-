@@ -54,7 +54,7 @@ export function Footer() {
           {/* Logo & Tagline */}
           <div className="max-w-sm">
             <Link to="/" className="text-2xl font-bold mb-4 block">
-              {isRTL ? 'سوقنا' : 'Souqna'}
+              {isRTL ? 'وجيه' : 'wajiht'}
             </Link>
             <p className="text-gray-400">{t('footer.tagline')}</p>
           </div>

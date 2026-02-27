@@ -1,13 +1,13 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { 
-  LayoutDashboard, 
-  ShoppingBag, 
-  Package, 
-  Users, 
-  Tag, 
-  FileText, 
-  BarChart3, 
+import {
+  LayoutDashboard,
+  ShoppingBag,
+  Package,
+  Users,
+  Tag,
+  FileText,
+  BarChart3,
   Settings,
   TrendingUp,
   TrendingDown,
@@ -58,18 +58,17 @@ export function AdminDashboard() {
       {/* Sidebar */}
       <aside className="w-64 bg-white border-r hidden lg:block">
         <div className="p-6">
-          <Link to="/" className="text-xl font-bold text-[#111111]">Souqna Admin</Link>
+          <Link to="/" className="text-xl font-bold text-[#111111]">wajiht Admin</Link>
         </div>
         <nav className="px-4 pb-4">
           {sidebarItems.map((item) => (
             <Link
               key={item.id}
               to={item.href}
-              className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-colors ${
-                item.id === 'dashboard' 
-                  ? 'bg-[#2F5DFF] text-white' 
+              className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-colors ${item.id === 'dashboard'
+                  ? 'bg-[#2F5DFF] text-white'
                   : 'hover:bg-gray-50 text-gray-700'
-              }`}
+                }`}
             >
               <item.icon className="w-5 h-5" />
               <span>{item.label}</span>
@@ -99,9 +98,8 @@ export function AdminDashboard() {
                   <div>
                     <p className="text-sm text-gray-500">{stat.title}</p>
                     <p className="text-2xl font-bold text-[#111111] mt-1">{stat.value}</p>
-                    <div className={`flex items-center gap-1 mt-2 text-sm ${
-                      stat.trend === 'up' ? 'text-green-600' : 'text-red-600'
-                    }`}>
+                    <div className={`flex items-center gap-1 mt-2 text-sm ${stat.trend === 'up' ? 'text-green-600' : 'text-red-600'
+                      }`}>
                       {stat.trend === 'up' ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />}
                       <span>{stat.change}</span>
                     </div>
@@ -134,12 +132,11 @@ export function AdminDashboard() {
                     </div>
                     <div className="text-right">
                       <p className="font-medium">QAR {order.total}</p>
-                      <span className={`text-xs px-2 py-1 rounded-full ${
-                        order.status === 'Delivered' ? 'bg-green-100 text-green-700' :
-                        order.status === 'Shipped' ? 'bg-blue-100 text-blue-700' :
-                        order.status === 'Processing' ? 'bg-yellow-100 text-yellow-700' :
-                        'bg-gray-100 text-gray-700'
-                      }`}>
+                      <span className={`text-xs px-2 py-1 rounded-full ${order.status === 'Delivered' ? 'bg-green-100 text-green-700' :
+                          order.status === 'Shipped' ? 'bg-blue-100 text-blue-700' :
+                            order.status === 'Processing' ? 'bg-yellow-100 text-yellow-700' :
+                              'bg-gray-100 text-gray-700'
+                        }`}>
                         {order.status}
                       </span>
                     </div>

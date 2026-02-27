@@ -48,9 +48,13 @@ export function Header() {
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
-            <span className="text-xl font-bold text-[#111111]">
-              {isRTL ? 'سوقنا' : 'Souqna'}
+          <Link to="/" className="flex items-center gap-1 group">
+            <span className="text-2xl font-black tracking-tighter text-[#111111] group-hover:text-[#2F5DFF] transition-colors">
+              {isRTL ? 'وجيه' : (
+                <>
+                  <span className="text-[#2F5DFF]">w</span>ajiht
+                </>
+              )}
             </span>
           </Link>
 
@@ -144,7 +148,7 @@ export function Header() {
               <SheetContent side={isRTL ? 'right' : 'left'} className="w-80">
                 <div className="flex flex-col gap-6">
                   <div className="flex items-center justify-between">
-                    <span className="text-xl font-bold">{isRTL ? 'سوقنا' : 'Souqna'}</span>
+                    <span className="text-xl font-bold">{isRTL ? 'وجيه' : 'wajiht'}</span>
                   </div>
 
                   {/* Mobile Search */}
@@ -189,15 +193,15 @@ export function Header() {
 
         {/* Mobile Search Bar */}
         {isSearchOpen && (
-          <div className="md:hidden pb-4">
-            <form onSubmit={handleSearch} className="relative">
-              <Search className={`absolute top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 ${isRTL ? 'right-3' : 'left-3'}`} />
+          <div className="md:hidden pb-4 px-2">
+            <form onSubmit={handleSearch} className="relative mt-2">
+              <Search className={`absolute top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 ${isRTL ? 'right-4' : 'left-4'}`} />
               <Input
                 type="search"
                 placeholder={t('nav.search')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className={`w-full ${isRTL ? 'pr-10' : 'pl-10'}`}
+                className={`w-full ${isRTL ? 'pr-12' : 'pl-12'} rounded-full bg-gray-100/50 backdrop-blur-sm border border-gray-200/50 py-6 focus-visible:ring-1 focus-visible:ring-[#2F5DFF]`}
                 autoFocus
               />
             </form>

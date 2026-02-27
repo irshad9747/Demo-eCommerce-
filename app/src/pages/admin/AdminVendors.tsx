@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  LayoutDashboard, 
-  ShoppingBag, 
-  Package, 
-  Users, 
-  Tag, 
-  FileText, 
-  BarChart3, 
+import {
+  LayoutDashboard,
+  ShoppingBag,
+  Package,
+  Users,
+  Tag,
+  FileText,
+  BarChart3,
   Settings,
   Search,
   Plus,
@@ -66,7 +66,7 @@ const vendors = [
 export function AdminVendors() {
   const [searchQuery, setSearchQuery] = useState('');
 
-  const filteredVendors = vendors.filter(vendor => 
+  const filteredVendors = vendors.filter(vendor =>
     vendor.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     vendor.email.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -76,18 +76,17 @@ export function AdminVendors() {
       {/* Sidebar */}
       <aside className="w-64 bg-white border-r hidden lg:block">
         <div className="p-6">
-          <Link to="/" className="text-xl font-bold text-[#111111]">Souqna Admin</Link>
+          <Link to="/" className="text-xl font-bold text-[#111111]">wajiht Admin</Link>
         </div>
         <nav className="px-4 pb-4">
           {sidebarItems.map((item) => (
             <Link
               key={item.id}
               to={item.href}
-              className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-colors ${
-                item.id === 'vendors' 
-                  ? 'bg-[#2F5DFF] text-white' 
+              className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-colors ${item.id === 'vendors'
+                  ? 'bg-[#2F5DFF] text-white'
                   : 'hover:bg-gray-50 text-gray-700'
-              }`}
+                }`}
             >
               <item.icon className="w-5 h-5" />
               <span>{item.label}</span>
@@ -201,8 +200,8 @@ export function AdminVendors() {
                   <TableCell>
                     <Badge className={
                       vendor.status === 'active' ? 'bg-green-100 text-green-700' :
-                      vendor.status === 'pending' ? 'bg-yellow-100 text-yellow-700' :
-                      'bg-red-100 text-red-700'
+                        vendor.status === 'pending' ? 'bg-yellow-100 text-yellow-700' :
+                          'bg-red-100 text-red-700'
                     }>
                       {vendor.status}
                     </Badge>

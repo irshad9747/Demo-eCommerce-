@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useStore } from './store';
 import { Header } from './components/Header';
@@ -17,6 +17,18 @@ import { AdminProducts } from './pages/admin/AdminProducts';
 import { AdminVendors } from './pages/admin/AdminVendors';
 import './App.css';
 
+import { useLocation } from 'react-router-dom';
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
 function AppContent() {
   const { language } = useStore();
   const { i18n } = useTranslation();
@@ -29,6 +41,7 @@ function AppContent() {
 
   return (
     <div className={`min-h-screen bg-[#F6F7F6] ${language === 'ar' ? 'font-sans' : ''}`}>
+      <ScrollToTop />
       <Header />
       <main>
         <Routes>
@@ -43,6 +56,7 @@ function AppContent() {
           <Route path="/admin/orders" element={<AdminOrders />} />
           <Route path="/admin/products" element={<AdminProducts />} />
           <Route path="/admin/vendors" element={<AdminVendors />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
       <Footer />

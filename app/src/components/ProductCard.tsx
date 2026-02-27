@@ -27,7 +27,7 @@ export function ProductCard({ product, variant = 'default' }: ProductCardProps) 
     e.preventDefault();
     e.stopPropagation();
     toggleWishlist(product.id);
-    toast.success(inWishlist 
+    toast.success(inWishlist
       ? (isRTL ? 'تمت الإزالة من المفضلة' : 'Removed from wishlist')
       : (isRTL ? 'تمت الإضافة إلى المفضلة' : 'Added to wishlist')
     );
@@ -96,46 +96,49 @@ export function ProductCard({ product, variant = 'default' }: ProductCardProps) 
   }
 
   return (
-    <Link to={`/product/${product.id}`} className="group block bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-      <div className="relative aspect-[4/5] overflow-hidden">
+    <Link to={`/product/${product.id}`} className="group block bg-white rounded-[24px] lg:rounded-[32px] overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 hover:-translate-y-2">
+      <div className="relative aspect-[4/5] overflow-hidden bg-[#F6F7F6]">
         <img
           src={product.image}
           alt={displayName}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
         {product.originalPrice && (
-          <div className="absolute top-3 left-3 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded-full">
-            {isRTL ? 'خصم' : 'SALE'}
+          <div className="absolute top-3 left-3 lg:top-4 lg:left-4 bg-red-600 text-white text-[9px] lg:text-[10px] font-bold px-2 lg:px-3 py-1 rounded-full uppercase tracking-wider shadow-lg">
+            {isRTL ? 'خصم' : 'Sale'}
           </div>
         )}
         <button
           onClick={handleToggleWishlist}
-          className="absolute top-3 right-3 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-white"
+          className="absolute top-3 right-3 lg:top-4 lg:right-4 w-9 h-9 lg:w-11 lg:h-11 bg-white/95 backdrop-blur-md rounded-full flex items-center justify-center lg:opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white shadow-xl translate-y-0 lg:translate-y-2 group-hover:translate-y-0"
         >
-          <Heart className={`w-5 h-5 ${inWishlist ? 'fill-red-500 text-red-500' : ''}`} />
+          <Heart className={`w-4 h-4 lg:w-[18px] lg:h-[18px] ${inWishlist ? 'fill-red-500 text-red-500' : 'text-[#111111]'}`} />
         </button>
-        <div className="absolute bottom-0 left-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
-          <Button 
+        <div className="absolute bottom-4 left-4 right-4 lg:bottom-6 lg:left-6 lg:right-6 lg:opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-0 lg:translate-y-4 group-hover:translate-y-0">
+          <Button
             onClick={handleAddToCart}
-            className="w-full bg-[#2F5DFF] hover:bg-[#2F5DFF]/90 rounded-full"
+            className="w-full bg-[#111111]/90 lg:bg-[#111111] hover:bg-black text-white rounded-full py-5 lg:py-6 shadow-xl backdrop-blur-sm lg:backdrop-blur-none"
           >
             <ShoppingCart className="w-4 h-4 mr-2" />
-            {t('product.addToCart')}
+            <span className="text-xs lg:text-sm">{t('product.addToCart')}</span>
           </Button>
         </div>
       </div>
-      <div className="p-4">
-        <p className="text-sm text-gray-500 mb-1">{product.vendor}</p>
-        <h3 className="font-medium text-[#111111] line-clamp-2 mb-2">{displayName}</h3>
-        <div className="flex items-center gap-1 mb-2">
-          <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-          <span className="text-sm">{product.rating}</span>
-          <span className="text-sm text-gray-400">({product.reviews})</span>
+      <div className="p-4 lg:p-6">
+        <p className="text-[9px] lg:text-[10px] font-bold uppercase tracking-widest text-[#2F5DFF] mb-1 lg:mb-2">{product.vendor}</p>
+        <h3 className="text-sm lg:text-base font-semibold text-[#111111] line-clamp-2 mb-2 lg:mb-3 leading-snug group-hover:text-[#2F5DFF] transition-colors">{displayName}</h3>
+        <div className="flex items-center gap-1.5 mb-2 lg:mb-4">
+          <div className="flex items-center gap-0.5">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} className={`w-2.5 h-2.5 lg:w-3 h-3 ${i < Math.floor(product.rating) ? 'fill-yellow-400 text-yellow-400' : 'text-gray-200'}`} />
+            ))}
+          </div>
+          <span className="text-[10px] lg:text-xs font-medium text-gray-500">({product.reviews})</span>
         </div>
-        <div className="flex items-center gap-2">
-          <span className="font-bold text-lg text-[#111111]">QAR {product.price}</span>
+        <div className="flex items-center gap-2 lg:gap-3">
+          <span className="font-bold text-base lg:text-xl text-[#111111] tracking-tight">QAR {product.price}</span>
           {product.originalPrice && (
-            <span className="text-sm text-gray-400 line-through">QAR {product.originalPrice}</span>
+            <span className="text-[10px] lg:text-sm text-gray-400 line-through decoration-red-500/30">QAR {product.originalPrice}</span>
           )}
         </div>
       </div>

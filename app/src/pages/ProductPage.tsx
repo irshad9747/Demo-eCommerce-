@@ -8,15 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
 
-// Sample product data - in real app, fetch from API
-const sampleProducts: import('../store').Product[] = [
-  { id: '1', name: 'Minimal Desk Lamp', nameAr: 'مصباح مكتبي بسيط', price: 129, image: '/Demo-eCommerce-/images/product_1.jpg', category: 'home', rating: 4.8, reviews: 124, vendor: 'HomeCraft', inStock: true },
-  { id: '2', name: 'Soft Knit Throw', nameAr: 'بطانية محبوكة ناعمة', price: 199, image: '/Demo-eCommerce-/images/product_2.jpg', category: 'home', rating: 4.9, reviews: 89, vendor: 'CozyLiving', inStock: true },
-  { id: '3', name: 'Everyday Backpack', nameAr: 'حقيبة ظهر يومية', price: 249, image: '/Demo-eCommerce-/images/product_3.jpg', category: 'fashion', rating: 4.7, reviews: 156, vendor: 'UrbanGear', inStock: true },
-  { id: '4', name: 'Ceramic Mug Set', nameAr: 'طقم أكواب سيراميك', price: 89, image: '/Demo-eCommerce-/images/product_4.jpg', category: 'home', rating: 4.6, reviews: 78, vendor: 'ArtisanHome', inStock: true },
-  { id: '5', name: 'Wireless Mouse', nameAr: 'فأرة لاسلكية', price: 149, image: '/Demo-eCommerce-/images/product_5.jpg', category: 'electronics', rating: 4.5, reviews: 203, vendor: 'TechPro', inStock: true },
-  { id: '6', name: 'Cotton Tee', nameAr: 'تيشيرت قطني', price: 79, image: '/Demo-eCommerce-/images/product_6.jpg', category: 'fashion', rating: 4.4, reviews: 112, vendor: 'BasicWear', inStock: true },
-];
+import { products } from '../data/products';
 
 export function ProductPage() {
   const { id } = useParams<{ id: string }>();
@@ -27,11 +19,10 @@ export function ProductPage() {
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
 
-  // Find product - in real app, fetch from API
-  const product = sampleProducts.find(p => p.id === id) || sampleProducts[0];
+  const product = products.find(p => p.id === id) || products[0];
   const inWishlist = isInWishlist(product.id);
 
-  const relatedProducts = sampleProducts.filter(p => p.category === product.category && p.id !== product.id).slice(0, 4);
+  const relatedProducts = products.filter(p => p.category === product.category && p.id !== product.id).slice(0, 4);
 
   const displayName = isRTL && product.nameAr ? product.nameAr : product.name;
 

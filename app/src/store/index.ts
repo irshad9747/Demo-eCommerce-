@@ -32,7 +32,7 @@ interface AppState {
   currency: string;
   setLanguage: (lang: 'en' | 'ar') => void;
   setCurrency: (currency: string) => void;
-  
+
   // Cart
   cart: CartItem[];
   addToCart: (product: Product) => void;
@@ -41,17 +41,17 @@ interface AppState {
   clearCart: () => void;
   getCartTotal: () => number;
   getCartCount: () => number;
-  
+
   // Wishlist
   wishlist: string[];
   toggleWishlist: (productId: string) => void;
   isInWishlist: (productId: string) => boolean;
-  
+
   // User
   user: User | null;
   setUser: (user: User | null) => void;
   isAuthenticated: boolean;
-  
+
   // Search
   searchQuery: string;
   setSearchQuery: (query: string) => void;
@@ -65,7 +65,7 @@ export const useStore = create<AppState>()(
       currency: 'QAR',
       setLanguage: (lang) => set({ language: lang }),
       setCurrency: (currency) => set({ currency }),
-      
+
       // Cart
       cart: [],
       addToCart: (product) => {
@@ -104,7 +104,7 @@ export const useStore = create<AppState>()(
       getCartCount: () => {
         return get().cart.reduce((count, item) => count + item.quantity, 0);
       },
-      
+
       // Wishlist
       wishlist: [],
       toggleWishlist: (productId) => {
@@ -116,18 +116,18 @@ export const useStore = create<AppState>()(
         }
       },
       isInWishlist: (productId) => get().wishlist.includes(productId),
-      
+
       // User
       user: null,
       setUser: (user) => set({ user, isAuthenticated: !!user }),
       isAuthenticated: false,
-      
+
       // Search
       searchQuery: '',
       setSearchQuery: (query) => set({ searchQuery: query }),
     }),
     {
-      name: 'souqna-store',
+      name: 'wajiht-store',
       partialize: (state) => ({
         cart: state.cart,
         wishlist: state.wishlist,

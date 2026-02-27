@@ -17,7 +17,7 @@ const resources = {
         orders: 'My Orders',
         addresses: 'Addresses',
       },
-      
+
       // Hero
       hero: {
         headline: 'Discover what you love.',
@@ -28,7 +28,7 @@ const resources = {
         returns: '30-day returns',
         scroll: 'Scroll',
       },
-      
+
       // Sections
       sections: {
         curatedPicks: 'CURATED PICKS',
@@ -93,7 +93,7 @@ const resources = {
         whatShoppersSay: 'What shoppers say',
         readAllReviews: 'Read all reviews',
       },
-      
+
       // Product
       product: {
         addToCart: 'Add to Cart',
@@ -108,7 +108,7 @@ const resources = {
         vendor: 'Vendor',
         freeShipping: 'Free Shipping',
       },
-      
+
       // Cart
       cart: {
         title: 'Shopping Cart',
@@ -123,7 +123,7 @@ const resources = {
         coupon: 'Coupon Code',
         apply: 'Apply',
       },
-      
+
       // Checkout
       checkout: {
         title: 'Checkout',
@@ -146,7 +146,7 @@ const resources = {
         cvv: 'CVV',
         cod: 'Cash on Delivery',
       },
-      
+
       // Footer
       footer: {
         tagline: 'The marketplace built for Qatar.',
@@ -158,9 +158,9 @@ const resources = {
         support: 'Support',
         sell: 'Sell',
         legal: 'Legal',
-        copyright: '© 2026 Souqna. All rights reserved.',
+        copyright: '© 2026 wajiht. All rights reserved.',
       },
-      
+
       // Common
       common: {
         loading: 'Loading...',
@@ -192,7 +192,7 @@ const resources = {
         orders: 'طلباتي',
         addresses: 'العناوين',
       },
-      
+
       // Hero
       hero: {
         headline: 'اكتشف ما تحب.',
@@ -203,7 +203,7 @@ const resources = {
         returns: 'إرجاع خلال 30 يومًا',
         scroll: 'تمرير',
       },
-      
+
       // Sections
       sections: {
         curatedPicks: 'اختياراتنا',
@@ -268,7 +268,7 @@ const resources = {
         whatShoppersSay: 'ما يقوله المتسوقون',
         readAllReviews: 'اقرأ جميع التقييمات',
       },
-      
+
       // Product
       product: {
         addToCart: 'أضف إلى العربة',
@@ -283,7 +283,7 @@ const resources = {
         vendor: 'البائع',
         freeShipping: 'شحن مجاني',
       },
-      
+
       // Cart
       cart: {
         title: 'عربة التسوق',
@@ -298,7 +298,7 @@ const resources = {
         coupon: 'رمز القسيمة',
         apply: 'تطبيق',
       },
-      
+
       // Checkout
       checkout: {
         title: 'إتمام الشراء',
@@ -321,7 +321,7 @@ const resources = {
         cvv: 'CVV',
         cod: 'الدفع عند الاستلام',
       },
-      
+
       // Footer
       footer: {
         tagline: 'السوق المصمم لقطر.',
@@ -333,9 +333,9 @@ const resources = {
         support: 'الدعم',
         sell: 'البيع',
         legal: 'قانوني',
-        copyright: '© 2026 سوقنا. جميع الحقوق محفوظة.',
+        copyright: '© 2026 وجيه. جميع الحقوق محفوظة.',
       },
-      
+
       // Common
       common: {
         loading: 'جاري التحميل...',

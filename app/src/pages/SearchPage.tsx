@@ -10,16 +10,7 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Slider } from '@/components/ui/slider';
 
-const sampleProducts: import('../store').Product[] = [
-  { id: '1', name: 'Minimal Desk Lamp', nameAr: 'مصباح مكتبي بسيط', price: 129, originalPrice: 159, image: '/Demo-eCommerce-/images/product_1.jpg', category: 'home', rating: 4.8, reviews: 124, vendor: 'HomeCraft', inStock: true },
-  { id: '2', name: 'Soft Knit Throw', nameAr: 'بطانية محبوكة ناعمة', price: 199, image: '/Demo-eCommerce-/images/product_2.jpg', category: 'home', rating: 4.9, reviews: 89, vendor: 'CozyLiving', inStock: true },
-  { id: '3', name: 'Everyday Backpack', nameAr: 'حقيبة ظهر يومية', price: 249, originalPrice: 299, image: '/Demo-eCommerce-/images/product_3.jpg', category: 'fashion', rating: 4.7, reviews: 156, vendor: 'UrbanGear', inStock: true },
-  { id: '4', name: 'Ceramic Mug Set', nameAr: 'طقم أكواب سيراميك', price: 89, image: '/Demo-eCommerce-/images/product_4.jpg', category: 'home', rating: 4.6, reviews: 78, vendor: 'ArtisanHome', inStock: true },
-  { id: '5', name: 'Wireless Mouse', nameAr: 'فأرة لاسلكية', price: 149, image: '/Demo-eCommerce-/images/product_5.jpg', category: 'electronics', rating: 4.5, reviews: 203, vendor: 'TechPro', inStock: true },
-  { id: '6', name: 'Cotton Tee', nameAr: 'تيشيرت قطني', price: 79, image: '/Demo-eCommerce-/images/product_6.jpg', category: 'fashion', rating: 4.4, reviews: 112, vendor: 'BasicWear', inStock: true },
-  { id: '7', name: 'Running Cap', nameAr: 'كاب رياضي', price: 59, image: '/Demo-eCommerce-/images/product_7.jpg', category: 'fashion', rating: 4.3, reviews: 67, vendor: 'SportFit', inStock: true },
-  { id: '8', name: 'Portable Speaker', nameAr: 'سماعة محمولة', price: 179, originalPrice: 229, image: '/Demo-eCommerce-/images/product_8.jpg', category: 'electronics', rating: 4.7, reviews: 145, vendor: 'SoundWave', inStock: true },
-];
+import { products } from '../data/products';
 
 const categories = [
   { id: 'all', label: 'All' },
@@ -45,11 +36,10 @@ export function SearchPage() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>(categoryParam !== 'all' ? [categoryParam] : []);
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState('relevance');
-
-  const [filteredProducts, setFilteredProducts] = useState(sampleProducts);
+  const [filteredProducts, setFilteredProducts] = useState(products);
 
   useEffect(() => {
-    let filtered = sampleProducts;
+    let filtered = [...products];
 
     // Filter by search query
     if (query) {
@@ -230,9 +220,12 @@ export function SearchPage() {
 
         <div className="flex gap-8">
           {/* Desktop Sidebar */}
-          <aside className="hidden lg:block w-64 flex-shrink-0">
-            <div className="bg-white rounded-[22px] p-6 sticky top-24">
-              <h3 className="text-lg font-bold text-[#111111] mb-4">{isRTL ? 'تصفية' : 'Filters'}</h3>
+          <aside className="hidden lg:block w-72 flex-shrink-0">
+            <div className="bg-white/70 backdrop-blur-xl border border-white/40 rounded-[32px] p-8 sticky top-24 shadow-sm">
+              <h3 className="text-xl font-bold text-[#111111] mb-6 flex items-center gap-2">
+                <SlidersHorizontal className="w-5 h-5" />
+                {isRTL ? 'تصفية' : 'Filters'}
+              </h3>
               <FilterContent />
             </div>
           </aside>
